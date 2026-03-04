@@ -36,7 +36,7 @@ pip install gz-dap-proxy
 Or install from source:
 
 ```bash
-git clone https://github.com/<user>/gz-dap-proxy.git
+git clone https://github.com/riccardo-enr/gz-dap-proxy.git
 cd gz-dap-proxy
 pip install -e .
 ```
@@ -94,6 +94,20 @@ dap.adapters.codelldb_gz = {
   args = { "--world", "my_world", "--", "codelldb" },
 }
 ```
+
+## Troubleshooting
+
+### `gz service` times out
+
+If `gz service -l` returns empty while Gazebo is running, gz-transport's multicast discovery is failing. This commonly happens when multiple network interfaces are present (e.g. Docker bridges, VPN).
+
+Fix by setting `GZ_IP` to bind discovery to localhost:
+
+```bash
+export GZ_IP=127.0.0.1
+```
+
+Add this to your shell profile for a permanent fix.
 
 ## Requirements
 
